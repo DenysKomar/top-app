@@ -1,11 +1,15 @@
 import React from 'react'
 import { SidebarProps } from './Sidebar.props'
-import styles from './Layout.module.css'
+import styles from './Sidebar.module.css'
 import Menu from '../Menu/Menu'
+import Logo from '../../public/LogoNew.svg'
+import cn from 'classnames'
 
-const Sidebar = ({...props}:SidebarProps):JSX.Element => {
+const Sidebar = ({className, ...props}:SidebarProps):JSX.Element => {
   return (
-    <div {...props}>
+    <div className={cn(className,styles.sidebar)} {...props}>
+        <Logo />
+        <div>search</div>
         <Menu/>
     </div>
   )
