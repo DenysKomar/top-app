@@ -8,6 +8,8 @@ import Rating from "../components/Rating/Rating"
 import { withLayout } from "../layout/Layout"
 import axios from "axios"
 import { MenuItem } from "../interfaces/menu.interface"
+import Input from "../components/Input/Input"
+import TextArea from "../components/TextArea/TextArea"
 
 
 function Home({menu}:HomeProps): JSX.Element {
@@ -22,7 +24,8 @@ function Home({menu}:HomeProps): JSX.Element {
       <Tag size='small'>Text</Tag>
       <Tag size='medium' color="red">Text</Tag>
       <Rating rating={rating} isEditable setRating={setRating}></Rating>
-      <ul>{menu.map(m => <li key={m._id.secondCategory}>{m._id.secondCategory}</li>)}</ul>
+      <Input placeholder='text'/>
+      <TextArea placeholder='text' />
     </>
   )
 }

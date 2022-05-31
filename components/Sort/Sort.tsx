@@ -14,9 +14,9 @@ const Sort = ({sort,setSort,className,...props}:SortProps):JSX.Element=> {
         >
             <SortIcon className={styles.sortIcon} /> По рейтингу
         </span>
-        <span onClick={()=> setSort(SortEnum.Prise)}
+        <span onClick={()=> setSort(SortEnum.Price)}
               className={cn({
-                [styles.active] : sort == SortEnum.Prise
+                [styles.active] : sort == SortEnum.Price
               })}
         >
             <SortIcon className={styles.sortIcon}  /> По&nbsp;Цене

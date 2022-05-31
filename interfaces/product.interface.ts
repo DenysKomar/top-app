@@ -30,5 +30,6 @@ export interface ProductsModel {
     reviews:ReviewModal[];
     reviewsCount:number;
     reviewAvg?:number;
-    advantage:string;
+    advantage?:string;
+    disadvantage?:string;
 }
