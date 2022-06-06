@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { ForwardedRef, forwardRef, useRef, useState } from 'react'
 import cn from 'classnames'
 import styles from './Product.module.css'
 import ProductProps from './Product.props'
@@ -11,10 +11,22 @@ import Divider from '../Divider/Divider'
 import Image from 'next/image'
 import Review from '../Review/Review'
 import ReviewForm from '../ReviewForm/ReviewForm'
+import {motion} from 'framer-motion'
 
-const Product = ({product,className,...props}:ProductProps):JSX.Element=> {
+const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref:ForwardedRef<HTMLDivElement>):JSX.Element=> {
   const [isReviewOpened,setIsReviewOpened] = useState(false) 
   const reviewRef = useRef<HTMLDivElement>(null)
+
+  const variants = {
+    visible: {
+      opacity:1,
+      height:'auto'
+    },
+    hidden: {
+      opacity: 0,
+      height:0
+    }
+  }
   
   const scrollToReview =()=> {
     setIsReviewOpened(true);
@@ -25,7 +37,7 @@ const Product = ({product,className,...props}:ProductProps):JSX.Element=> {
   }
   
   return (
-  <div className={className} {...props}>
+  <div className={className} {...props} ref={ref}>
     <Card className={styles.product}>
         <div className={styles.logo}>
         <img  src={process.env.NEXT_PUBLIC_DOMAIN + product.image}  alt={product.title} />
@@ -71,11 +83,8 @@ const Product = ({product,className,...props}:ProductProps):JSX.Element=> {
 
     </Card>
   
-     
-    <Card color="blue" className={cn(styles.review, {
-      [styles.opened] : isReviewOpened,
-      [styles.closed] : !isReviewOpened
-    })} ref={reviewRef}>
+    <motion.div animate={isReviewOpened ? 'visible' : 'hidden'} variants={variants} initial="hidden">
+    <Card color="blue" className={styles.review} ref={reviewRef}>
        { product.reviewAvg ? product.reviews.map(r=> 
         (     
           <div key={r._id}>
@@ -86,8 +95,9 @@ const Product = ({product,className,...props}:ProductProps):JSX.Element=> {
       ): " Отзывов нет"}
       <ReviewForm productId={product._id} />
     </Card>
+    </motion.div>
     </div>
   )
-}
+}))
 
 export default Product
