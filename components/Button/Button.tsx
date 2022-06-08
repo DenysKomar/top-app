@@ -3,10 +3,11 @@ import styles from './Button.module.css'
 import ButtonProps from './Button.props'
 import cn from 'classnames'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const Button = ({appearance,arrow='none',children, className, ...props}:ButtonProps):JSX.Element => {
   return (
-    <button className={cn(styles.button, className, {
+    <motion.button whileHover={{scale:1.05}} className={cn(styles.button, className, {
         [styles.primary] : appearance=='primary',
         [styles.ghost] : appearance=='ghost'
 
@@ -19,7 +20,7 @@ const Button = ({appearance,arrow='none',children, className, ...props}:ButtonPr
       })}>
         <Image src='/Vector.svg' width="6" height="10" alt='arrow'/>
         </span>}
-    </button>
+    </motion.button>
   )
 }
 

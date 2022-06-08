@@ -12,7 +12,7 @@ import { IReviewForm, IReviewSendResponse } from './ReviewForm.interface'
 import axios from 'axios'
 import { API } from '../../helpers/api'
 
-const ReviewForm = ({productId,className,...props}:ReviewFormProps):JSX.Element=> {
+const ReviewForm = ({isOpened,productId,className,...props}:ReviewFormProps):JSX.Element=> {
   const { register, control, handleSubmit,formState: {errors},reset} =useForm<IReviewForm>();
   const [isSuccess,setIsSuccess] = useState<boolean>(false)
   const [isError,setIsError] = useState<string>()
@@ -40,13 +40,13 @@ const ReviewForm = ({productId,className,...props}:ReviewFormProps):JSX.Element=
              value:true,
              message:"Заполните имя"
            }
-          }))} placeholder="Имя" error={errors.name}/>
+          }))} placeholder="Имя" error={errors.name} tabIndex={isOpened?0:-1}/>
           <Input {...(register('title' , {
            required:{
              value:true,
              message:"Заполните заголовок"
            }
-          }))} placeholder="Заголовок" className={cn(styles.title)} error={errors.title}/>
+          }))} placeholder="Заголовок" className={cn(styles.title)} error={errors.title} tabIndex={isOpened?0:-1}/>
           <div className={styles.rating}>
               <span>Оценка:</span>
               <Controller
@@ -57,7 +57,7 @@ const ReviewForm = ({productId,className,...props}:ReviewFormProps):JSX.Element=
                     message:"Укажите рейтинг"
                   }}}
                   render= {({field})=>(
-                    <Rating isEditable rating={field.value} ref={field.ref} setRating={field.onChange} error={errors.rating} />
+                    <Rating isEditable rating={field.value} ref={field.ref} setRating={field.onChange} error={errors.rating} tabIndex={isOpened?0:-1} />
                   )}
               />
               
@@ -67,9 +67,9 @@ const ReviewForm = ({productId,className,...props}:ReviewFormProps):JSX.Element=
              value:true,
              message:"Заполните заголовок"
            }
-          }))} placeholder="Текст"  className={cn(styles.textArea)} error={errors.description}/>
+          }))} placeholder="Текст"  className={cn(styles.textArea)} error={errors.description} tabIndex={isOpened?0:-1}/>
           <div className={styles.submit}>
-            <Button appearance='primary'> Отправить</Button>
+            <Button appearance='primary' tabIndex={isOpened?0:-1}> Отправить</Button>
             <span className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
           </div>
       </div>

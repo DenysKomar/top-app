@@ -8,6 +8,8 @@ const Sort = ({sort,setSort,className,...props}:SortProps):JSX.Element=> {
   return (
     <div className={cn(styles.sort, className)} {...props}>
         <span onClick={()=> setSort(SortEnum.Rating)}
+         onKeyDown={(key)=> {if(key.code == "Enter" || key.code == "Space") {setSort(SortEnum.Rating)}}}
+              tabIndex={0}
               className={cn({
                 [styles.active] : sort == SortEnum.Rating
               })}
@@ -15,6 +17,8 @@ const Sort = ({sort,setSort,className,...props}:SortProps):JSX.Element=> {
             <SortIcon className={styles.sortIcon} /> По рейтингу
         </span>
         <span onClick={()=> setSort(SortEnum.Price)}
+        onKeyDown={(key)=> {if(key.code == "Enter" || key.code == "Space") {setSort(SortEnum.Price)}}}
+              tabIndex={0}
               className={cn({
                 [styles.active] : sort == SortEnum.Price
               })}

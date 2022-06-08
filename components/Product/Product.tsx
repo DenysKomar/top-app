@@ -34,6 +34,7 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
       behavior:'smooth',
       block:'start'
     })
+    reviewRef.current?.focus()
   }
   
   return (
@@ -84,16 +85,16 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
     </Card>
   
     <motion.div animate={isReviewOpened ? 'visible' : 'hidden'} variants={variants} initial="hidden">
-    <Card color="blue" className={styles.review} ref={reviewRef}>
-       { product.reviewAvg ? product.reviews.map(r=> 
+    <Card color="blue" className={styles.review} ref={reviewRef} tabIndex={isReviewOpened ? 0 :-1}>
+       { product.reviewAvg && product.reviews.map(r=> 
         (     
           <div key={r._id}>
               <Review review={r}/>
               <Divider />
           </div>
         )
-      ): " Отзывов нет"}
-      <ReviewForm productId={product._id} />
+      )}
+      <ReviewForm productId={product._id} isOpened={isReviewOpened} />
     </Card>
     </motion.div>
     </div>

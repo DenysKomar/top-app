@@ -24,7 +24,6 @@
     color: #787D85;
     font-weight: 300;
     font-size: 12px;
-    line-height: 16px;
 }
 .secondBlock {
     margin-left: 12px;
@@ -43,7 +42,7 @@
     color: #787D85;
     font-weight: 500;
     font-size: 14px;
-    line-height: 19px;
+    outline-offset: -1px;
 }
 
 .thirdLevelActive,

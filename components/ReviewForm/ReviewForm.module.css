@@ -5,6 +5,7 @@
     grid-template-columns: [start] auto 1fr auto [end];
     gap:20px 30px;
     align-items: center;
+    padding:20px;
 }
 .textArea, .submit {
     grid-column: start / end;
