@@ -28,12 +28,12 @@ const Search = ({className, ...props}:SearchProps):JSX.Element=> {
 
 
   return (
-    <div className={cn(className,styles.search)} {...props}>
+    <form className={cn(className,styles.search)} {...props} role='search'>
         <Input className={styles.input} placeholder="Поиск..." value={search} onChange={(e) => setSearch(e.target.value)}
             onKeyDown={handleKeyDown}
         />
-        <Button className={styles.button} appearance="primary" onClick={goToSearch} > <SearchIcon /> </Button>
-    </div>
+        <Button className={styles.button} appearance="primary" onClick={goToSearch} aria-label="Искать по сайту" > <SearchIcon /> </Button>
+    </form>
   )
 }
 

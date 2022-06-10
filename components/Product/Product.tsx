@@ -44,13 +44,16 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
         <img  src={process.env.NEXT_PUBLIC_DOMAIN + product.image}  alt={product.title} />
         </div>
         <div className={styles.title}>{product.title}</div>
-        <div className={styles.price}>{priceRu(product.price)}
-         {product.oldPrice && <Tag className={styles.oldPrice} color="green">{priceRu(product.price - product.oldPrice)}</Tag>}</div>
-        <div className={styles.credit}>{priceRu(product.credit)}/<span className={styles.month}>мес</span></div>
-        <div className={styles.rating}><Rating rating={product.reviewAvg ?? product.initialRating} /></div>
+        <div className={styles.price}><span><span className='visualyHidden'>цена</span> {priceRu(product.price)}</span>
+         {product.oldPrice && <Tag className={styles.oldPrice} color="green"><span  className='visualyHidden'>скидка</span>{priceRu(product.price - product.oldPrice)}</Tag>}</div>
+        <div className={styles.credit}><span><span className='visualyHidden'>кредит</span> {priceRu(product.credit)}/</span><span className={styles.month}>мес</span></div>
+        <div className={styles.rating}>
+        <span  className='visualyHidden'>{"рейтинг" + (product.reviewAvg ?? product.initialRating) }</span>
+          <Rating rating={product.reviewAvg ?? product.initialRating} />
+          </div>
         <div className={styles.tags}>{product.categories.map(c => <Tag className={styles.category} key={c} color="ghost">{c}</Tag>)}</div>
-        <div className={styles.priceTitle}>Цена</div>
-        <div className={styles.creditTitle}>Кредит</div>
+        <div className={styles.priceTitle} aria-hidden={true}>Цена</div>
+        <div className={styles.creditTitle} aria-hidden={true}>Кредит</div>
         <div className={styles.rateTitle}><a href="#ref" onClick={scrollToReview}>{product.reviewsCount} {declOfNum(product.reviewsCount, ['отзыв',' отзыва', 'отзывов'])} </a></div>
         <Divider className={styles.hr} />
         <div className={styles.description}>{product.description}</div>
@@ -76,7 +79,7 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
         <Divider className={cn(styles.hr,styles.hr2)} />
           <div className={styles.actions}>
             <Button appearance='primary'>Узнать подробнее</Button>
-            <Button appearance='ghost' arrow={isReviewOpened ? 'down' :'right'} className={styles.reviewButton} onClick={()=> setIsReviewOpened(!isReviewOpened)}>Читать отзывы</Button>
+            <Button aria-expanded={isReviewOpened} appearance='ghost' arrow={isReviewOpened ? 'down' :'right'} className={styles.reviewButton} onClick={()=> setIsReviewOpened(!isReviewOpened)}>Читать отзывы</Button>
 
           </div>
         

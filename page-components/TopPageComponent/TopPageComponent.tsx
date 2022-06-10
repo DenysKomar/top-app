@@ -6,17 +6,18 @@ import styles from './TopPageComponent.module.css'
 import HhData from '../../components/HhData/HhData'
 import { TopLevelCategory } from '../../interfaces/page.interface'
 import Advantages from '../../components/Advantages/Advantages'
-import Ptag from '../../components/Ptag/Ptag'
 import Sort from '../../components/Sort/Sort'
 import { SortEnum } from '../../components/Sort/Sort.props'
 import { SortReducer } from './sort.reducer'
 import Product from '../../components/Product/Product'
+import { useReducedMotion } from 'framer-motion'
 
 const TopPageComponent = ({page,products,firstCategory}:TopPageComponentProps):JSX.Element => {
   const [{products:sortedProducts,sort},dispatchSort] = useReducer(SortReducer, {products, sort:SortEnum.Rating})
   const setSort = (sort:SortEnum) => {
     dispatchSort({type:sort})
   }
+  const shouldReduceMotion =useReducedMotion()
 
   useEffect(()=>{
     dispatchSort({type:'reset',initialState:products})
@@ -28,11 +29,11 @@ const TopPageComponent = ({page,products,firstCategory}:TopPageComponentProps):J
         <Htag tag='h1' >
             {page.title}
         </Htag>
-        {products && <Tag color="grey" size="medium">{products.length}</Tag>}
+        {products && <Tag color="grey" size="medium" aria-label={products.length + " елементов"}>{products.length}</Tag>}
         <Sort sort={sort} setSort={setSort}></Sort>
       </div>
-      <div>
-        {sortedProducts && sortedProducts.map(p => (<Product key={p._id} layout product={p} />))}
+      <div role='list'>
+        {sortedProducts && sortedProducts.map(p => (<Product role='listitem' key={p._id} layout={shouldReduceMotion ? false : true} product={p} />))}
       </div>
       <div className={styles.hhTitle}>
         <Htag tag='h2' >

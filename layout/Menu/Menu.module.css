@@ -7,6 +7,15 @@
     font-size: 18px;
     line-height: 25px;
     margin-top: 20px;
+    border:none;
+    list-style: none;
+    padding: 0;
+    text-decoration: none;
+}
+.firstLevelList{
+    list-style: none;
+    padding: 0px;
+    text-decoration: none;
 }
 .firstLevelActive,
 .firstLevel:hover {
@@ -24,16 +33,23 @@
     color: #787D85;
     font-weight: 300;
     font-size: 12px;
+    background: none;
+    border: none;
+    padding: 0;
 }
 .secondBlock {
     margin-left: 12px;
-    padding-left: 32px;
+    padding: 0 0 0 32px;
     margin-top:15px;
+    list-style: none;
+   
 
     border-left: 1px solid var(--gray-light);
 }
 .secondLevelBlock {
     overflow: hidden;
+    list-style: none;
+    padding: 0;
 }
 .thirdLevel {
     margin-bottom: 10px;
@@ -43,6 +59,10 @@
     font-weight: 500;
     font-size: 14px;
     outline-offset: -1px;
+    text-decoration: none;
+    text-align: none;
+    padding: 0;
+    list-style: none;
 }
 
 .thirdLevelActive,
