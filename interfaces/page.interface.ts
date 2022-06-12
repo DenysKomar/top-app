@@ -7,7 +7,7 @@ export enum TopLevelCategory {
 export interface TopPageAdvantage {
     _id:string;
     title:string;
-    description:string
+    description:string;
 }
 
 export interface HhData {

@@ -7,7 +7,7 @@ import CheckIcon from '../../public/mark.svg'
 
 
 
-const Advantages = ({advantages}:AdvantagesProps):JSX.Element=> {
+const Advantages = ({advantages}):JSX.Element=> {
   return (
     <>
     {advantages.map(a => (

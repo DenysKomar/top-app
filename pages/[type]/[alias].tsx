@@ -8,13 +8,29 @@ import { ProductsModel } from "../../interfaces/product.interface"
 import { firstLevelMenu } from "../../helpers/helpers"
 import TopPageComponent from "../../page-components/TopPageComponent/TopPageComponent"
 import { API } from "../../helpers/api"
+import  Head from 'next/head'
+import { Erorr404 } from "../404"
 
 
 function TopPage({firstCategory, page,products}:CourseProps): JSX.Element {
+if(!page || !products) { 
+  return (
+    <Erorr404></Erorr404>
+  )
+}
+
   return (
     <>
+   
+    <Head>
+        <title>{page.title}</title>
+        <meta name="description" content={page.metaDescription} />
+        <meta property="og:title" content={page.title}/>
+        <meta name="og:description" content={page.metaDescription} />
+   
+      </Head>
         <TopPageComponent firstCategory={firstCategory} page={page} products={products} />
-    </>
+      </>
   )
 }
 
@@ -31,7 +47,7 @@ export const getStaticPaths:GetStaticPaths = async () => {
   }
     return {
         paths,
-        fallback:true,
+        fallback:false,
     }
 }
 

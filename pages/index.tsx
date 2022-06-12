@@ -11,11 +11,14 @@ import { MenuItem } from "../interfaces/menu.interface"
 import Input from "../components/Input/Input"
 import TextArea from "../components/TextArea/TextArea"
 import { API } from "../helpers/api"
+import Error from 'next/error'
 
 
 function Home({menu}:HomeProps): JSX.Element {
     const [rating,setRating] = useState<number>(4)
-  return (
+
+
+     return (
     <>
  
       <Htag tag="h1">Text</Htag>
