@@ -28,7 +28,7 @@ const Up = ():JSX.Element=> {
     className={styles.up}
     onClick={scrollToTop}>
         
-        <ButtonIcon appearance='primary' icon='UpIcon' onClick={scrollToTop} ></ButtonIcon>
+        <ButtonIcon appearance='primary' icon='UpIcon' aria-label="Вернутся в начало" onClick={scrollToTop} ></ButtonIcon>
     </motion.div>
   )
 }

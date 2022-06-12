@@ -12,7 +12,7 @@ import  Head from 'next/head'
 import { Erorr404 } from "../404"
 
 
-function TopPage({firstCategory, page,products}:CourseProps): JSX.Element {
+function TopPage({firstCategory, page,products}:TopPageProps): JSX.Element {
 if(!page || !products) { 
   return (
     <Erorr404></Erorr404>
@@ -43,15 +43,15 @@ export const getStaticPaths:GetStaticPaths = async () => {
     const { data: menu} = await axios.post<MenuItem[]>(API.topPage.find, {
       firstCategory :m.id
     })
-        paths = paths.concat(menu.flatMap(s => s.pages.map(p=>`/${ m.route}/${p.alias}`)),)
+        paths = paths.concat(menu.flatMap(s => s.pages.map(p=>`/${ m.route}/${p.alias}`)))
   }
     return {
         paths,
-        fallback:false,
+        fallback:true,
     }
 }
 
-export const getStaticProps: GetStaticProps<CourseProps> = async ({params}:GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps<TopPageProps> = async ({params}:GetStaticPropsContext<ParsedUrlQuery>) => {
     if(!params) {
         return {
             notFound:true
@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({params}:GetSt
   
 }
 
-interface CourseProps extends Record<string,unknown>{
+interface TopPageProps extends Record<string,unknown>{
   menu : MenuItem[],
   firstCategory: TopLevelCategory;
   page:TopPageModel

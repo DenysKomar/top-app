@@ -27,7 +27,7 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
       height:0
     }
   }
-  
+
   const scrollToReview =()=> {
     setIsReviewOpened(true);
     reviewRef.current?.scrollIntoView({
@@ -36,6 +36,7 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
     })
     reviewRef.current?.focus()
   }
+
   
   return (
   <div className={className} {...props} ref={ref}>
@@ -44,9 +45,18 @@ const Product = motion(forwardRef(({product,className,...props}:ProductProps,ref
         <img  src={process.env.NEXT_PUBLIC_DOMAIN + product.image}  alt={product.title} />
         </div>
         <div className={styles.title}>{product.title}</div>
-        <div className={styles.price}><span><span className='visualyHidden'>цена</span> {priceRu(product.price)}</span>
-         {product.oldPrice && <Tag className={styles.oldPrice} color="green"><span  className='visualyHidden'>скидка</span>{priceRu(product.price - product.oldPrice)}</Tag>}</div>
-        <div className={styles.credit}><span><span className='visualyHidden'>кредит</span> {priceRu(product.credit)}/</span><span className={styles.month}>мес</span></div>
+        <div className={styles.price}><span><span className='visualyHidden'>цена</span>
+         {product.price ? priceRu(product.price) : <span>Цена не доступна</span>}
+         </span>
+         {product.oldPrice && <Tag className={styles.oldPrice} color="green">
+          <span  className='visualyHidden'>скидка
+         </span>{product.price ? priceRu(product.price - product.oldPrice): <span>Цена со скидкой не доступна</span>}</Tag>}
+         </div>
+        <div className={styles.credit}>
+           <span> 
+          <span className='visualyHidden'>кредит 
+         </span> {product.credit ? priceRu(product.credit):<span>Кредит не доступен</span> }/</span><span className={styles.month}>мес</span> 
+        </div>
         <div className={styles.rating}>
         <span  className='visualyHidden'>{"рейтинг" + (product.reviewAvg ?? product.initialRating) }</span>
           <Rating rating={product.reviewAvg ?? product.initialRating} />

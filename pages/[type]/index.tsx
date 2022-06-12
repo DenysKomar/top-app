@@ -7,7 +7,8 @@ import { ParsedUrlQuery } from "node:querystring"
 import { API } from "../../helpers/api"
 
 
-function Type({firstCategory}): JSX.Element {
+function Type({firstCategory}:TypeProps): JSX.Element {
+  
    
   return (
     <>
@@ -21,11 +22,12 @@ export default withLayout(Type);
 export const getStaticPaths:GetStaticPaths = async () => {
     return {
         paths:firstLevelMenu.map(m => '/' + m.route),
-        fallback:false
+        fallback:true
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({params}:GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps<TypeProps> = async ({params}:GetStaticPropsContext<ParsedUrlQuery>) => {
+ 
     if(!params) {
         return {
             notFound:true
@@ -38,6 +40,7 @@ export const getStaticProps: GetStaticProps = async ({params}:GetStaticPropsCont
       }
   }
   const { data: menu} = await axios.post<MenuItem[]>(API.topPage.find, {
+    
     firstCategory: firstCategoryItem.id
   })
     return {
@@ -48,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({params}:GetStaticPropsCont
     }
 }
 
-interface HomeProps extends Record<string,unknown>{
+interface TypeProps extends Record<string,unknown>{
   menu : MenuItem[],
   firstCategory: number;
 }

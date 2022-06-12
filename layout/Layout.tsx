@@ -20,7 +20,7 @@ const Layout = ({children}:LayoutProps):JSX.Element => {
   }
   return (
     <div className={styles.wrapper}>
-        <a onKeyDown={(key)=>skipContentAction(key)} onFocus={()=>setIsSkipLinkDisplayed(true)} tabIndex={1} className={cn(styles.skipLink, {
+        <a onKeyDown={(key)=>skipContentAction(key)} onFocus={()=>setIsSkipLinkDisplayed(true)} tabIndex={0} className={cn(styles.skipLink, {
           [styles.displayed]: isSkipLinkDisplayed
         })} >Сразу к содержанию</a>
         <Header className={styles.header}/>
